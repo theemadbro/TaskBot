@@ -1,0 +1,14 @@
+{
+  "name": "TaskBot",
+  "secretKey": "",
+  "services": [
+    {
+      "appId": "",
+      "id": "http://localhost:5025/api/messages",
+      "type": "endpoint",
+      "appPassword": "",
+      "endpoint": "http://localhost:5025/api/messages",
+      "name": "TaskBot"
+    }
+  ]
+}

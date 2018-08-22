@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>43a5ebd3-0664-41c2-98ad-d83c96e3fb74</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.0.1-preview" />
+    <PackageReference Include="Microsoft.Bot.Builder.Core" Version="4.0.1-preview" />
+    <PackageReference Include="Microsoft.Bot.Builder.Core.Extensions" Version="4.0.1-preview" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.0.1-preview" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.0.1-preview" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>
