@@ -21,7 +21,7 @@ namespace TaskBot.Dialogs
                 {
                     var activity = dc.Context.Activity;
 
-                    await dc.Prompt("choicePrompt", $"[MainDialog] new or returning?",                    
+                    await dc.Prompt("choicePrompt", $"Are you a Returning User or a New User?",                    
                         new ChoicePromptOptions
                         {
                             Choices = new List<Choice>()
@@ -46,6 +46,7 @@ namespace TaskBot.Dialogs
                     var response = (args["Value"] as FoundChoice)?.Value;
                     if (response == "Returning")
                     {
+                        await dc.Context.SendActivity("This service is currently under construction. Sorry about that!");
                         //await dc.Begin(ReturningUserDialog.Id);
                     }
                     else if (response == "New User")

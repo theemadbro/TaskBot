@@ -46,6 +46,7 @@ namespace TaskBot.Dialogs.NewUser
                     state["FirstDate"] = (string) test2;
                     
                     await dc.Context.SendActivity($"And there you have it!{Environment.NewLine}Title: {state["FirstTitle"]}{Environment.NewLine}Date: {state["FirstDate"]}");
+                    await dc.Context.SendActivity("This is the way that you'll be creating tasks, pretty easy huh? Now lets work on retrieving your tasks.");
                 }
             });
             Dialogs.Add("namePrompt", new Microsoft.Bot.Builder.Dialogs.TextPrompt());

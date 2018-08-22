@@ -51,8 +51,6 @@ namespace TaskBot
                 IStorage dataStore = new MemoryStorage();
 
                 //var uri = new Uri(@"** service endpoint **");
-
-                
                 /*
                 IStorage dataStoreUserState =
                 new Microsoft.Bot.Builder.Azure.CosmosDbStorage(uri,

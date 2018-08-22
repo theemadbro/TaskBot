@@ -27,7 +27,7 @@ namespace TaskBot
             
             var state = context.GetConversationState<Dictionary<string, object>>();
             var dialogCon = dialogs.CreateContext(context, state);
-            // var userstate = context.
+
             switch (context.Activity.Type)
             {
 
@@ -37,33 +37,18 @@ namespace TaskBot
                         if (newMember.Id != context.Activity.Recipient.Id)
                         {
                             await dialogCon.Begin("introDialog");
-                            
                         }
                     }
                     break;
+
                 case ActivityTypes.Message:
                     await dialogCon.Continue();
                     if(!context.Responded)
-                {
-                    await dialogCon.Begin("mainDialog");
-                }
+                    {
+                        await dialogCon.Begin("mainDialog");
+                    }
                     break;
             }
-            
-
-            /*
-            if (context.Activity.Type == ActivityTypes.Message)
-            {
-                var state = context.GetConversationState<Dictionary<string, object>>();
-                var dialogCon = dialogs.CreateContext(context, state);
-
-                await dialogCon.Continue();
-                if(!context.Responded)
-                {
-                    await dialogCon.Begin("introDialog");
-                }
-            }
-            */
         }
     }
 }
