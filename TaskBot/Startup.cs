@@ -50,17 +50,26 @@ namespace TaskBot
                 // is restarted, anything stored in memory will be gone. 
                 IStorage dataStore = new MemoryStorage();
 
-                //var uri = new Uri(@"** service endpoint **");
-                /*
-                IStorage dataStoreUserState =
-                new Microsoft.Bot.Builder.Azure.CosmosDbStorage(uri,
-                "** auth key **"
-                , "helloworldbot"
-                , "userstate");
-                */
+                var uri = new Uri(@"https://taskbot-db.documents.azure.com:443/");
                 
+                IStorage dataStoreUsers =
+                new Microsoft.Bot.Builder.Azure.CosmosDbStorage(uri,
+                "vLJnjjqAN4veC2zTo2VVhd2Uy7bYVPhQ4EqgNXjDO08XbL0aPr7yq443ekTB6eFRlXPtj2gh5Ev1NOvUlZU0aA=="
+                , "TaskBotDB"
+                , "users");
+
+                IStorage dataStoreTasks =
+                new Microsoft.Bot.Builder.Azure.CosmosDbStorage(uri,
+                "vLJnjjqAN4veC2zTo2VVhd2Uy7bYVPhQ4EqgNXjDO08XbL0aPr7yq443ekTB6eFRlXPtj2gh5Ev1NOvUlZU0aA=="
+                , "TaskBotDB"
+                , "tasks");
+
+
                 // options.Middleware.Add(new UserState<CurrentUser>(dataStoreUserState));
                 options.Middleware.Add(new ConversationState<Dictionary<string,object>>(dataStore));
+                options.Middleware.Add(new UserState<Users>(dataStoreUsers));
+                // options.Middleware.Add(new UserState<Tasks>(dataStoreTasks));
+
 
             });
         }

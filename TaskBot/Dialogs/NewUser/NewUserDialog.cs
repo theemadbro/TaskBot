@@ -27,7 +27,10 @@ namespace TaskBot.Dialogs.NewUser
                 async (dc, args, next) =>
                 {
                     var state = dc.Context.GetConversationState<Dictionary<string, object>>();
+                    var currentuser = dc.Context.GetUserState<Users>();
+                    currentuser.name = (string) args["Value"];
                     state["User"] = (string) args["Value"];
+                    state["CurrentUser"] = currentuser;
                     await dc.Context.SendActivity($"Great! Nice to meet you, {state["User"]}. Now all we need is to teach you the basics.");
                     await dc.Prompt("firstTitlePrompt", "We're going to walk you through making your first task! For simplicities sake, what's the first thing that comes to mind?");
                 },
@@ -40,10 +43,17 @@ namespace TaskBot.Dialogs.NewUser
                 async (dc, args, next) =>
                 {
                     var state = dc.Context.GetConversationState<Dictionary<string, object>>();
-                    dynamic test = args.First().Value;
-                    dynamic test2 = test[0].Value;
-                    //(new System.Collections.Generic.Mscorlib_CollectionDebugView<Microsoft.Bot.Builder.Prompts.DateTimeResult.DateTimeResolution>(test).Items[0]).Value
-                    state["FirstDate"] = (string) test2;
+                    var currentuser = dc.Context.GetUserState<Users>();
+                    // I wanted to dig into the JSON for the resolution response, that was layered down a while, and couldn't find another way. this is dirty.
+                    dynamic dig1 = args.First().Value;
+                    dynamic result = dig1[0].Value;
+                    state["FirstDate"] = (string) result;
+                    Tasks firstTask = new Tasks();
+                    firstTask.creator = (string) state["User"];
+                    firstTask.title = (string) state["FirstTitle"];
+                    firstTask.taskTime= (DateTime) state["FirstDate"];
+                    currentuser.tasks.Add(firstTask);
+
                     
                     await dc.Context.SendActivity($"And there you have it!{Environment.NewLine}Title: {state["FirstTitle"]}{Environment.NewLine}Date: {state["FirstDate"]}");
                     await dc.Context.SendActivity("This is the way that you'll be creating tasks, pretty easy huh? Now lets work on retrieving your tasks.");
