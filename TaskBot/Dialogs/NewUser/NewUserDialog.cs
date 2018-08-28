@@ -48,13 +48,13 @@ namespace TaskBot.Dialogs.NewUser
                     dynamic dig1 = args.First().Value;
                     dynamic result = dig1[0].Value;
                     state["FirstDate"] = (string) result;
+                    DateTime firstdate = Convert.ToDateTime(state["FirstDate"]);
                     Tasks firstTask = new Tasks();
-                    firstTask.creator = (string) state["User"];
                     firstTask.title = (string) state["FirstTitle"];
-                    firstTask.taskTime= (DateTime) state["FirstDate"];
+                    firstTask.taskTime = firstdate;
                     currentuser.tasks.Add(firstTask);
 
-                    
+
                     await dc.Context.SendActivity($"And there you have it!{Environment.NewLine}Title: {state["FirstTitle"]}{Environment.NewLine}Date: {state["FirstDate"]}");
                     await dc.Context.SendActivity("This is the way that you'll be creating tasks, pretty easy huh? Now lets work on retrieving your tasks.");
                 }
